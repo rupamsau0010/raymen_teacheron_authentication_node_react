@@ -9,11 +9,12 @@ const bcrypt = require("bcrypt")
 const generalUserSchema = new mongoose.Schema({
     userName: {
         type: String,
-        required: [true, "Please Enter Your Name"]
+        required: [true, "Please Enter Your Name"],
+        unique: true
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Please Enter Your Name"],
         unique: true,
         lowercase: true,
         validate: [isEmail, "Please Enter a Valid Email"]
