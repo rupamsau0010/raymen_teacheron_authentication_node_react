@@ -9,8 +9,9 @@ const handleErrors = (err) => {
     let errors = { userName: "" ,email: "", password: ""};
 
     // Incorrect Email while login...
-    if (err.message === "Incorrect Email") {
-        errors.email = "That email is not Registrated. Consider Signup.";
+    if (err.message === "Incorrect UserName or Email") {
+        errors.email = "That userName or email is not Registrated. Consider Signup.";
+        errors.userName = "That userName or email is not Registrated. Consider Signup.";
         return errors;
     }
 
@@ -56,5 +57,18 @@ module.exports.signup_post = async(req, res) => {
         const errors = handleErrors(err);  // If any conditional error occures by the user, then handel it...
         res.status(400).send(errors);  
     }   
+}
+
+// Post request controller for login...
+module.exports.login_post = async (req, res) => {
+    const {userNameOremail, password} = req.body; // Getting the data from the frontend using body-parser...
+
+    try {
+        const generalUser = await Generalusers.login(userNameOremail, password);  // Login the user using Statics function of User data model...
+        res.status(200).json({ status: "success", generalUser: generalUser._id });  
+    } catch(err) {
+        const errors = handleErrors(err);  // If any conditional error occures by the user, then handel it...
+        res.status(400).json({ errors });  
+    }
 }
 
