@@ -18,6 +18,6 @@ mongoConnect()
 app.use("/authentication/", generalUserRoutes)
 
 // Running the server on port 3000
-app.listen(3000 || process.env.PORT, () => {
-    console.log(`Server is running on port 3000 or ${process.env.PORT}`);
+app.listen(5000 || process.env.PORT, () => {
+    console.log(`Server is running on port 5000 or ${process.env.PORT}`);
 })

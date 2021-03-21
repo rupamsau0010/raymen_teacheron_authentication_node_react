@@ -68,7 +68,8 @@ module.exports.login_post = async (req, res) => {
         res.status(200).json({ status: "success", generalUser: generalUser._id });  
     } catch(err) {
         const errors = handleErrors(err);  // If any conditional error occures by the user, then handel it...
-        res.status(400).json({ errors });  
+        console.log(errors);
+        res.status(200).json({ errors });  
     }
 }
 
